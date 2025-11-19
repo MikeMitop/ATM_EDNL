@@ -2,7 +2,10 @@ class ATM {
     constructor() {
         this.balance = 1000;
         this.correctPin = "1234";
+        this.cardNumber = "1234 5678 9012 3456";
         this.blocked = false;
+        this.pinAttempts = 0;
+        this.maxPinAttempts = 3;
 
         this.state = new IdleState(this);
 
@@ -10,23 +13,57 @@ class ATM {
         this.uiAction = document.getElementById("action");
         this.logElem = document.getElementById("log");
 
-        this.render("Sistema iniciado");
+        this.render("Sistema iniciado", "info");
     }
 
-    setState(newState, action) {
+    setState(newState, action, logType = "info") {
         this.state = newState;
-        this.render(action);
+        this.render(action, logType);
     }
 
-    render(action) {
+    render(action, logType = "info") {
+        // Update state display
         this.uiState.textContent = this.state.name();
         this.uiAction.textContent = action;
-        this.log(`[${this.state.name()}] ${action}`);
+        
+        // Apply styling based on state
+        this.updateStateStyle();
+        
+        // Log the action
+        this.log(`[${this.state.name()}] ${action}`, logType);
     }
 
-    log(msg) {
-        this.logElem.innerHTML += msg + "<br>";
+    updateStateStyle() {
+        // Remove all state classes
+        this.uiState.classList.remove('state-active', 'state-error', 'state-warning');
+        this.uiAction.classList.remove('state-active', 'state-error', 'state-warning');
+        
+        const stateName = this.state.name();
+        
+        if (stateName === 'Success' || stateName === 'Selecting') {
+            this.uiState.classList.add('state-active');
+            this.uiAction.classList.add('state-active');
+        } else if (stateName === 'Failure' || stateName === 'Blocked') {
+            this.uiState.classList.add('state-error');
+            this.uiAction.classList.add('state-error');
+        } else if (stateName === 'Processing' || stateName === 'CardInserted') {
+            this.uiState.classList.add('state-warning');
+            this.uiAction.classList.add('state-warning');
+        }
+    }
+
+    log(msg, type = "info") {
+        const timestamp = new Date().toLocaleTimeString();
+        const logEntry = document.createElement('div');
+        logEntry.className = `log-entry ${type}`;
+        logEntry.textContent = `[${timestamp}] ${msg}`;
+        this.logElem.appendChild(logEntry);
         this.logElem.scrollTop = this.logElem.scrollHeight;
+    }
+
+    showCardInfo() {
+        alert(`🏧 Información de la Tarjeta\n\n💳 Número de tarjeta: ${this.cardNumber}\n🔑 PIN: ${this.correctPin}\n\n⚠️ Mantenga esta información segura`);
+        this.log("Información de tarjeta consultada", "info");
     }
 
     /* Controlador: delega en el estado actual */
