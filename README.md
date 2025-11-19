@@ -45,10 +45,21 @@ El cajero implementa 7 estados diferentes:
 ## 🚀 Cómo Usar
 
 1. Abre `index.html` en tu navegador web
-2. Haz clic en "💳 Insertar Tarjeta"
-3. Ingresa el PIN (por defecto: **1234**)
-4. Selecciona la operación deseada
-5. Sigue las instrucciones en pantalla
+2. **Consulta el PIN**: Haz clic en "🔍 Consultar PIN" para ver las credenciales de prueba
+3. Haz clic en "💳 Insertar Tarjeta"
+4. Ingresa el PIN (por defecto: **1234**)
+5. Selecciona la operación deseada
+6. Sigue las instrucciones en pantalla
+
+### 🔐 Manejo de Bloqueos
+
+El cajero simula el comportamiento real de un ATM:
+- **3 intentos de PIN**: Si ingresas el PIN incorrecto 3 veces, la cuenta se bloquea
+- **Bloqueo automático**: La tarjeta es retenida temporalmente por seguridad
+- **Reinicio automático**: Después de 7 segundos, el sistema se reinicia automáticamente
+- **Bloqueo manual**: Si seleccionas "Bloquear Cuenta", el sistema también se reiniciará después de un tiempo
+
+⚠️ **Nota**: El reinicio automático es una funcionalidad de demostración. En un cajero real, se requeriría contactar al banco para desbloquear la cuenta.
 
 ## 🛠️ Tecnologías
 
@@ -69,8 +80,12 @@ ATM_EDNL/
 
 ## 🔐 Credenciales de Prueba
 
-- **PIN por defecto**: 1234
+El cajero muestra visiblemente la información de la tarjeta de prueba:
+- **Número de tarjeta**: 1234 5678 9012 3456
+- **PIN**: 1234 (también disponible mediante el botón "Consultar PIN")
 - **Saldo inicial**: $1,000
+
+💡 **Tip**: El botón "🔍 Consultar PIN" muestra la información de la tarjeta sin necesidad de revisar el código fuente.
 
 ## 📝 Notas Técnicas
 

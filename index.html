@@ -275,6 +275,56 @@
             color: #f39c12;
         }
 
+        .card-info-panel {
+            background: #34495e;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 2px solid #3498db;
+        }
+
+        .card-info-panel h3 {
+            color: #ecf0f1;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        .card-info-content {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .card-number {
+            color: #3498db;
+            font-size: 1.3rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .card-note {
+            color: #95a5a6;
+            font-size: 0.85rem;
+            font-style: italic;
+        }
+
+        .helper-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .helper-buttons button {
+            flex: 1;
+            min-width: 150px;
+        }
+
         @media (max-width: 768px) {
             .atm-container {
                 padding: 20px;
@@ -296,6 +346,14 @@
             .status-value {
                 width: 100%;
             }
+
+            .helper-buttons {
+                flex-direction: column;
+            }
+
+            .helper-buttons button {
+                width: 100%;
+            }
         }
     </style>
 </head>
@@ -314,6 +372,19 @@
             <div class="status-row">
                 <span class="status-label">⚡ Acción:</span>
                 <span class="status-value" id="action">Esperando tarjeta</span>
+            </div>
+        </div>
+
+        <div class="card-info-panel">
+            <h3>💳 Información de Tarjeta de Prueba</h3>
+            <div class="card-info-content">
+                <div class="card-number" id="cardNumber">1234 5678 9012 3456</div>
+                <div class="card-note">Use esta tarjeta para probar el cajero</div>
+                <div class="helper-buttons">
+                    <button class="btn-primary" onclick="controller.showCardInfo()">
+                        🔍 Consultar PIN
+                    </button>
+                </div>
             </div>
         </div>
 

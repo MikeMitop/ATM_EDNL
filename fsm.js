@@ -338,28 +338,44 @@ class FailureState extends State {
 class BlockedState extends State {
     name() { return "Blocked"; }
 
+    constructor(atm) {
+        super(atm);
+        // Expulsar tarjeta automáticamente después de 5 segundos y reiniciar el cajero
+        this.atm.log("⚠️ Tarjeta será retenida por seguridad", "error");
+        this.atm.log("Por favor contacte a su banco para desbloquear su cuenta", "error");
+        
+        setTimeout(() => {
+            this.atm.log("🔄 Reiniciando sistema...", "warning");
+            setTimeout(() => {
+                this.atm.blocked = false;
+                this.atm.pinAttempts = 0;
+                this.atm.setState(new IdleState(this.atm), "Sistema reiniciado. Puede intentar nuevamente", "info");
+            }, 2000);
+        }, 5000);
+    }
+
     insertCard() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     enterPin() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     checkBalance() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     withdraw() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     deposit() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     payService() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 
     blockAccount() {
@@ -367,6 +383,6 @@ class BlockedState extends State {
     }
 
     ejectCard() {
-        this.atm.log("🔒 Cuenta bloqueada. Contacte a su banco para desbloquear", "error");
+        this.atm.log("🔒 Sistema bloqueado. Espere a que se reinicie", "error");
     }
 }

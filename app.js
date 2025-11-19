@@ -2,6 +2,7 @@ class ATM {
     constructor() {
         this.balance = 1000;
         this.correctPin = "1234";
+        this.cardNumber = "1234 5678 9012 3456";
         this.blocked = false;
         this.pinAttempts = 0;
         this.maxPinAttempts = 3;
@@ -58,6 +59,11 @@ class ATM {
         logEntry.textContent = `[${timestamp}] ${msg}`;
         this.logElem.appendChild(logEntry);
         this.logElem.scrollTop = this.logElem.scrollHeight;
+    }
+
+    showCardInfo() {
+        alert(`🏧 Información de la Tarjeta\n\n💳 Número de tarjeta: ${this.cardNumber}\n🔑 PIN: ${this.correctPin}\n\n⚠️ Mantenga esta información segura`);
+        this.log("Información de tarjeta consultada", "info");
     }
 
     /* Controlador: delega en el estado actual */
