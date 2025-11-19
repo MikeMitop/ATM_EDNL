@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FSM Cajero Automático</title>
+    <style>
+        body { font-family: Arial; padding: 20px; }
+        #log { border: 1px solid #444; padding: 10px; height: 280px; overflow-y: auto; }
+        button { margin: 5px; padding: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>FSM Cajero Automático — Aplicación Web OO</h1>
+
+    <p><strong>Estado:</strong> <span id="state">Idle</span></p>
+    <p><strong>Acción:</strong> <span id="action">Esperando tarjeta</span></p>
+
+    <h3>Acciones</h3>
+    <button onclick="controller.insertCard()">Insertar tarjeta</button>
+    <button onclick="controller.enterPin()">Ingresar PIN</button>
+    <button onclick="controller.checkBalance()">Consultar saldo</button>
+    <button onclick="controller.withdraw()">Retirar</button>
+    <button onclick="controller.deposit()">Consignación</button>
+    <button onclick="controller.payService()">Pago servicios</button>
+    <button onclick="controller.blockAccount()">Bloquear cuenta</button>
+    <button onclick="controller.ejectCard()">Expulsar tarjeta</button>
+
+    <h3>Registro de estados</h3>
+    <div id="log"></div>
+
+    <!-- Carga de scripts -->
+    <script src="fsm.js"></script>
+    <script src="app.js"></script>
+
+</body>
+</html>
